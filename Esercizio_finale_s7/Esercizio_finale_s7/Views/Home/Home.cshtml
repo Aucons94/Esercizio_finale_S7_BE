@@ -14,7 +14,7 @@
         {
             <div class="col-md-4">
                 <div class="card mb-4" style="width: 18rem;">
-                    <img src="~/Content/imgs/@item.FotoUrl" class="card-img-top" alt="Immagine del Prodotto" style="max-height: 180px;">
+                    <img src="@item.FotoUrl" class="card-img-top" alt="Immagine del Prodotto" style="max-height: 180px;">
                     <div class="card-body">
                         <h5 class="card-title">@item.Nome</h5>
                         <p class="card-text">Prezzo: @item.Prezzo</p>
@@ -31,7 +31,7 @@
                                 <button type="submit" class="btn btn-sm btn-success mb-3">Aggiungi Al Carrello</button>
                             }
                         </form>
-                        @Html.ActionLink("Dettagli", "DettagliProdotto", "Prodotto", new { id = item.IdProdotto }, new { @class = "btn btn-sm btn-warning" })
+                        @Html.ActionLink("Dettagli", "Details", "Prodotto", new { id = item.IdProdotto }, new { @class = "btn btn-sm btn-warning" })
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,8 +47,15 @@ namespace Esercizio_finale_s7.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProdotto,Nome,FotoUrl,Prezzo,TempoConsegna,Ingredienti")] Prodotto prodotto)
+        public ActionResult Create([Bind(Include = "IdProdotto,Nome,FotoUrl,Prezzo,TempoConsegna,Ingredienti")] Prodotto prodotto, HttpPostedFileBase FotoUrl)
         {
+            if (FotoUrl != null && FotoUrl.ContentLength > 0)
+            {
+                string nomeFile = Path.GetFileName(FotoUrl.FileName);
+                string pathToSave = Path.Combine(Server.MapPath("~/Content/Images/"), nomeFile);
+                FotoUrl.SaveAs(pathToSave);
+                prodotto.FotoUrl = "/Content/Images/" + nomeFile;
+            }
             if (ModelState.IsValid)
             {
                 db.Prodotto.Add(prodotto);
