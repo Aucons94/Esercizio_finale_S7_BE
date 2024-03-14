@@ -11,6 +11,8 @@ namespace Esercizio_finale_s7.Models
     {
         public List<CarrelloItem> Prodotti { get; set; }
         public int IdUtente { get; set; }
+
+        [Display(Name = "Indirizzo di Consegna")]
         public string IndirizzoConsegna { get; set; }
         public string NoteSpeciali { get; set; }
 
@@ -26,10 +28,10 @@ namespace Esercizio_finale_s7.Models
         public int Quantita { get; set; }
         public decimal Totale { get; set; }
 
-        [DisplayName("Indirizzo di consegna")]
+        [DisplayName("Indirizzo di Consegna")]
         [Required(ErrorMessage = "L'indirizzo di consegna è obbligatorio.")]
         public string IndirizzoConsegna { get; set; }
-        [DisplayName("Note speciali")]
+        [DisplayName("Note Speciali")]
         public string NoteSpeciali { get; set; }
     }
 }

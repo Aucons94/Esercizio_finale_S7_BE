@@ -20,14 +20,17 @@ namespace Esercizio_finale_s7.Models
 
         public int IdUtente { get; set; }
 
+        [Display(Name = "Data Ordine")]
         public DateTime DataOrdine { get; set; }
 
         public decimal? Importo { get; set; }
 
         [StringLength(255)]
+        [Display(Name = "Indirizzo di Consegna")]
         public string IndirizzoConsegna { get; set; }
 
         [StringLength(255)]
+        [Display(Name = "Note Speciali")]
         public string NoteSpeciali { get; set; }
 
         public bool Evaso { get; set; }

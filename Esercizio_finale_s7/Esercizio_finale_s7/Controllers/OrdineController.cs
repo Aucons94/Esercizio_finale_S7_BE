@@ -10,6 +10,7 @@ using Esercizio_finale_s7.Models;
 
 namespace Esercizio_finale_s7.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class OrdineController : Controller
     {
         private ModelDbContext db = new ModelDbContext();
@@ -40,7 +41,7 @@ namespace Esercizio_finale_s7.Controllers
         public ActionResult Create()
         {
             ViewBag.IdUtente = new SelectList(db.Utente, "IdUtente", "Nome");
-            return View();
+            return View(new Ordine());
         }
 
         // POST: Ordine/Create

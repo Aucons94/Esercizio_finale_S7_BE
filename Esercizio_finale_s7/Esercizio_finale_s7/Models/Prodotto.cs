@@ -22,10 +22,11 @@ namespace Esercizio_finale_s7.Models
         public string Nome { get; set; }
 
         [StringLength(255)]
-        public string FotoUrl { get; set; }
+        public string Foto { get; set; }
 
         public decimal Prezzo { get; set; }
 
+        [Display(Name = "Tempo Consegna")]
         public int TempoConsegna { get; set; }
 
         [StringLength(255)]
@@ -33,5 +34,6 @@ namespace Esercizio_finale_s7.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DettaglioOrdine> DettaglioOrdine { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

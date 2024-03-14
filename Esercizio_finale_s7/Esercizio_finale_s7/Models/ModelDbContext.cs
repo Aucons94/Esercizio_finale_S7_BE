@@ -33,7 +33,7 @@ namespace Esercizio_finale_s7.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Prodotto>()
-                .Property(e => e.FotoUrl)
+                .Property(e => e.Foto)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Ruolo>()

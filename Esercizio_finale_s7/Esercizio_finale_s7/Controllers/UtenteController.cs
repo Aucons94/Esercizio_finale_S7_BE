@@ -10,6 +10,7 @@ using Esercizio_finale_s7.Models;
 
 namespace Esercizio_finale_s7.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UtenteController : Controller
     {
         private ModelDbContext db = new ModelDbContext();

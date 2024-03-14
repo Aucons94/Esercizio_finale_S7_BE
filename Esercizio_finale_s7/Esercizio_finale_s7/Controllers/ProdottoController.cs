@@ -11,6 +11,7 @@ using Esercizio_finale_s7.Models;
 
 namespace Esercizio_finale_s7.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProdottoController : Controller
     {
         private ModelDbContext db = new ModelDbContext();
@@ -18,7 +19,8 @@ namespace Esercizio_finale_s7.Controllers
         // GET: Prodottoe
         public ActionResult Index()
         {
-            return View(db.Prodotto.ToList());
+            var prodotti = db.Prodotto.Where(p => !p.IsDeleted).ToList();
+            return View(prodotti);
         }
 
         // GET: Prodottoe/Details/5
@@ -47,14 +49,14 @@ namespace Esercizio_finale_s7.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProdotto,Nome,FotoUrl,Prezzo,TempoConsegna,Ingredienti")] Prodotto prodotto, HttpPostedFileBase FotoUrl)
+        public ActionResult Create([Bind(Include = "IdProdotto,Nome,Foto,Prezzo,TempoConsegna,Ingredienti")] Prodotto prodotto, HttpPostedFileBase Foto)
         {
-            if (FotoUrl != null && FotoUrl.ContentLength > 0)
+            if (Foto != null && Foto.ContentLength > 0)
             {
-                string nomeFile = Path.GetFileName(FotoUrl.FileName);
+                string nomeFile = Path.GetFileName(Foto.FileName);
                 string pathToSave = Path.Combine(Server.MapPath("~/Content/Images/"), nomeFile);
-                FotoUrl.SaveAs(pathToSave);
-                prodotto.FotoUrl = "/Content/Images/" + nomeFile;
+                Foto.SaveAs(pathToSave);
+                prodotto.Foto = nomeFile;
             }
             if (ModelState.IsValid)
             {
@@ -86,7 +88,7 @@ namespace Esercizio_finale_s7.Controllers
         // Per altri dettagli, vedere https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProdotto,Nome,FotoUrl,Prezzo,TempoConsegna,Ingredienti")] Prodotto prodotto)
+        public ActionResult Edit([Bind(Include = "IdProdotto,Nome,Foto,Prezzo,TempoConsegna,Ingredienti")] Prodotto prodotto)
         {
             if (ModelState.IsValid)
             {
@@ -112,14 +114,19 @@ namespace Esercizio_finale_s7.Controllers
             return View(prodotto);
         }
 
-        // POST: Prodottoe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Prodotto prodotto = db.Prodotto.Find(id);
-            db.Prodotto.Remove(prodotto);
+            if (prodotto == null)
+            {
+                return HttpNotFound();
+            }
+            prodotto.IsDeleted = true;
+            db.Entry(prodotto).State = EntityState.Modified;
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

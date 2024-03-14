@@ -9,8 +9,6 @@ using System.Web.Security;
 
 namespace Esercizio_finale_s7.Controllers
 {
-
-    [Authorize]
     public class HomeController : Controller
     {
         readonly ModelDbContext db = new ModelDbContext();
@@ -18,7 +16,8 @@ namespace Esercizio_finale_s7.Controllers
         [AllowAnonymous]
         public ActionResult Home()
         {
-            return View(db.Prodotto.ToList());
+            var prodotti = db.Prodotto.Where(p => !p.IsDeleted).ToList();
+            return View(prodotti);
         }
 
         public ActionResult Profilo()
