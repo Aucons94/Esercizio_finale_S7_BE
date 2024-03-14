@@ -214,6 +214,7 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Home\Registrazione.cshtml" />
     <Content Include="Views\Home\VisualizzaCarrello.cshtml" />
+    <Content Include="Views\Home\Profilo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

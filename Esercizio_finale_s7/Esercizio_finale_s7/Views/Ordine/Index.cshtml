@@ -10,59 +10,65 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Utente.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataOrdine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Importo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IndirizzoConsegna)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoteSpeciali)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Evaso)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Utente.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataOrdine)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Importo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IndirizzoConsegna)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoteSpeciali)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Evaso)
-        </td>
-
-        @if (isAdmin)
-        {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdine }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdOrdine }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdine })
-            </td>
-        }
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Utente
+            </th>
+            <th>
+                Data Ordine
+            </th>
+            <th>
+                Importo
+            </th>
+            <th>
+                Indirizzo Consegna
+            </th>
+            <th>
+                Note Speciali
+            </th>
+            <th>
+                Evaso
+            </th>
+            @if (isAdmin)
+            {
+                <th></th>
+            }
         </tr>
-}
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Utente.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataOrdine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Importo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IndirizzoConsegna)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoteSpeciali)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EvasoDisplay)
+                </td>
 
+                @if (isAdmin)
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdine }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IdOrdine }, new { @class = "btn btn-info" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdine }, new { @class = "btn btn-danger" })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
 </table>

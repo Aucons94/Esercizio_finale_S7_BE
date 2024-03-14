@@ -6,6 +6,20 @@
 
 <h2 class="text-center">Carrello</h2>
 
+<!-- Aggiungi questo blocco per visualizzare il messaggio di errore -->
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var key in ViewData.ModelState.Keys)
+        {
+            foreach (var error in ViewData.ModelState[key].Errors)
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        }
+    </div>
+}
+
 @if (Model != null && Model.Any())
 {
     <table class="table">
@@ -31,7 +45,7 @@
                         </div>
                     </td>
                     <td class="prezzo">@carrelloItem.Prodotto.Prezzo</td>
-                    <td class="subtotale">@carrelloItem.Prodotto.Prezzo*carrelloItem.Quantita</td>
+                    <td class="subtotale">@(carrelloItem.Prodotto.Prezzo * carrelloItem.Quantita)</td>
                     <td>
                         <button class="btn btn-danger" onclick="RimuoviDalCarrello('@carrelloItem.Prodotto.IdProdotto')">Rimuovi</button>
                     </td>
@@ -58,26 +72,6 @@ else
         });
     </script>
 }
-
-<!-- Modale per carrello vuoto, da spostare a layout ?  -->
-<div class="modal fade" id="carrelloVuotoModal" tabindex="-1" role="dialog" aria-labelledby="carrelloVuotoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="carrelloVuotoModalLabel">Attenzione</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Il tuo carrello è vuoto.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 @using (Html.BeginForm("ConcludiOrdine", "Home", FormMethod.Post))
 {

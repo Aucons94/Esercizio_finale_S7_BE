@@ -1,0 +1,34 @@
+﻿@model List<Esercizio_finale_s7.Models.Ordine>
+
+@{
+    ViewBag.Title = "Ordini Utente";
+}
+
+<h2>Ordini Utente</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th>Data Ordine</th>
+            <th>Importo</th>
+            <th>Indirizzo Consegna</th>
+            <th>Note Speciali</th>
+            <th>Evaso</th>
+        </tr>
+        @foreach (var ordine in Model)
+        {
+            <tr>
+                <td>@ordine.DataOrdine.ToShortDateString()</td>
+                <td>@string.Format("{0:C}", ordine.Importo)</td>
+                <td>@ordine.IndirizzoConsegna</td>
+                <td>@ordine.NoteSpeciali</td>
+                <td>@ordine.EvasoDisplay</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Nessun ordine effettuato.</p>
+}

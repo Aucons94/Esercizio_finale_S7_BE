@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -26,6 +27,7 @@ namespace Esercizio_finale_s7.Models
         public decimal Totale { get; set; }
 
         [DisplayName("Indirizzo di consegna")]
+        [Required(ErrorMessage = "L'indirizzo di consegna è obbligatorio.")]
         public string IndirizzoConsegna { get; set; }
         [DisplayName("Note speciali")]
         public string NoteSpeciali { get; set; }

@@ -17,8 +17,8 @@ namespace Esercizio_finale_s7.Controllers
         // GET: Ordine
         public ActionResult Index()
         {
-            var ordine = db.Ordine.Include(o => o.Utente);
-            return View(ordine.ToList());
+            var ordini = db.Ordine.Where(o => !o.IsDeleted).Include(o => o.Utente);
+            return View(ordini.ToList());
         }
 
         // GET: Ordine/Details/5
@@ -115,8 +115,14 @@ namespace Esercizio_finale_s7.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Ordine ordine = db.Ordine.Find(id);
-            db.Ordine.Remove(ordine);
+            if (ordine == null)
+            {
+                return HttpNotFound();
+            }
+            ordine.IsDeleted = true;
+            db.Entry(ordine).State = EntityState.Modified;
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

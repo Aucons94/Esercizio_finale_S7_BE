@@ -39,7 +39,7 @@ namespace Esercizio_finale_s7.Controllers
         // GET: Prodottoe/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Prodotto());
         }
 
         // POST: Prodottoe/Create

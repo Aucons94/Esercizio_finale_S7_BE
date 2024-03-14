@@ -17,8 +17,8 @@ namespace Esercizio_finale_s7.Controllers
         // GET: Utente
         public ActionResult Index()
         {
-            var utente = db.Utente.Include(u => u.Ruolo);
-            return View(utente.ToList());
+            var utentiAttivi = db.Utente.Where(u => !u.IsDeleted).Include(u => u.Ruolo);
+            return View(utentiAttivi.ToList());
         }
 
         // GET: Utente/Details/5
@@ -40,7 +40,7 @@ namespace Esercizio_finale_s7.Controllers
         public ActionResult Create()
         {
             ViewBag.IdRuolo = new SelectList(db.Ruolo, "IdRuolo", "Role");
-            return View();
+            return View(new Utente());
         }
 
         // POST: Utente/Create
@@ -52,6 +52,15 @@ namespace Esercizio_finale_s7.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool isDuplicateEmail = db.Utente.Any(u => u.Email == utente.Email && !u.IsDeleted);
+
+                if (isDuplicateEmail)
+                {
+                    ModelState.AddModelError("Email", "Questo indirizzo email è già utilizzato da un altro utente attivo.");
+                    ViewBag.IdRuolo = new SelectList(db.Ruolo, "IdRuolo", "Role", utente.IdRuolo);
+                    return View(utente);
+                }
+
                 db.Utente.Add(utente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -109,16 +118,31 @@ namespace Esercizio_finale_s7.Controllers
             return View(utente);
         }
 
-        // POST: Utente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Utente utente = db.Utente.Find(id);
-            db.Utente.Remove(utente);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (utente == null)
+            {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                utente.IsDeleted = true;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Si è verificato un errore durante la soft delete dell'utente.";
+                return View("Error");
+            }
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

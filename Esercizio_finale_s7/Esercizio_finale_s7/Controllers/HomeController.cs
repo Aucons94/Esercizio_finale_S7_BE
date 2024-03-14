@@ -26,10 +26,29 @@ namespace Esercizio_finale_s7.Controllers
             return View();
         }
 
+        public ActionResult OrdiniUtente()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                int userId;
+                if (int.TryParse(User.Identity.Name, out userId))
+                {
+                    var ordiniUtente = db.Ordine
+                        .Where(o => o.IdUtente == userId)
+                        .OrderByDescending(o => o.DataOrdine)
+                        .ToList();
+
+                    return View(ordiniUtente);
+                }
+            }
+
+            return RedirectToAction("Login", "Home");
+        }
+
         [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            return View(new Autorizzazione());
         }
 
         [AllowAnonymous]
@@ -90,7 +109,7 @@ namespace Esercizio_finale_s7.Controllers
         [AllowAnonymous]
         public ActionResult Registrazione()
         {
-            return View();
+            return View(new Utente());
         }
 
         [HttpPost]
@@ -99,6 +118,14 @@ namespace Esercizio_finale_s7.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool isDuplicateEmail = db.Utente.Any(u => u.Email == utente.Email && !u.IsDeleted);
+
+                if (isDuplicateEmail)
+                {
+                    ModelState.AddModelError("Email", "Questo indirizzo email è già utilizzato da un altro utente attivo.");
+                    return View(utente);
+                }
+
                 utente.IdRuolo = 1;
                 db.Utente.Add(utente);
                 db.SaveChanges();
@@ -109,7 +136,7 @@ namespace Esercizio_finale_s7.Controllers
                 return RedirectToAction("Home");
             }
 
-            return View();
+            return View(utente);
         }
 
         public ActionResult VisualizzaCarrello()
@@ -171,48 +198,56 @@ namespace Esercizio_finale_s7.Controllers
         [HttpPost]
         public ActionResult ConcludiOrdine(string indirizzoConsegna, string noteSpeciali)
         {
-
-            int userId = (int)Session["UserId"];
-
-            if (userId == 0)
+            if (User.Identity.IsAuthenticated)
             {
-                FormsAuthentication.SignOut();
-            }
+                string userEmail = User.Identity.Name;
+                var utente = db.Utente.FirstOrDefault(u => u.Email == userEmail);
 
-            if (Session["UserId"] != null)
-            {
-                if (Session["Carrello"] is List<CarrelloItem> carrelloItems && carrelloItems.Any())
+                if (utente != null)
                 {
-                    decimal totale = carrelloItems.Sum(item => item.Prodotto.Prezzo * item.Quantita);
-
-                    var nuovoOrdine = new Ordine
+                    if (Session["Carrello"] is List<CarrelloItem> carrelloItems && carrelloItems.Any())
                     {
-                        IdUtente = (int)Session["UserId"],
-                        DataOrdine = DateTime.Now,
-                        Evaso = false,
-                        Importo = totale,
-                        IndirizzoConsegna = indirizzoConsegna,
-                        NoteSpeciali = noteSpeciali,
-                        DettaglioOrdine = carrelloItems.Select(item => new DettaglioOrdine
+                        if (string.IsNullOrWhiteSpace(indirizzoConsegna))
                         {
-                            IdProdotto = item.Prodotto.IdProdotto,
-                            Quantita = item.Quantita
-                        }).ToList()
-                    };
+                            ModelState.AddModelError("IndirizzoConsegna", "Inserisci un indirizzo di consegna.");
+                            return View("VisualizzaCarrello", carrelloItems);
+                        }
 
-                    db.Ordine.Add(nuovoOrdine);
-                    db.SaveChanges();
+                        if (!ModelState.IsValid)
+                        {
+                            return View("VisualizzaCarrello", carrelloItems);
+                        }
 
-                    Session["Carrello"] = null;
+                        var nuovoOrdine = new Ordine
+                        {
+                            IdUtente = utente.IdUtente,
+                            DataOrdine = DateTime.Now,
+                            Evaso = false,
+                            Importo = carrelloItems.Sum(item => item.Prodotto.Prezzo * item.Quantita),
+                            IndirizzoConsegna = indirizzoConsegna,
+                            NoteSpeciali = noteSpeciali,
+                            DettaglioOrdine = new List<DettaglioOrdine>()
+                        };
 
-                    return RedirectToAction("Home");
-                }
-                else
-                {
-                    return RedirectToAction("Login");
+                        foreach (var item in carrelloItems)
+                        {
+                            var dettaglioOrdine = new DettaglioOrdine
+                            {
+                                IdProdotto = item.Prodotto.IdProdotto,
+                                Quantita = item.Quantita
+                            };
+                            nuovoOrdine.DettaglioOrdine.Add(dettaglioOrdine);
+                        }
+                        db.Ordine.Add(nuovoOrdine);
+                        db.SaveChanges();
+                        Session["Carrello"] = null;
+
+                        return RedirectToAction("Home");
+                    }
                 }
             }
-            return RedirectToAction("Home");
+
+            return RedirectToAction("Login");
         }
 
     }

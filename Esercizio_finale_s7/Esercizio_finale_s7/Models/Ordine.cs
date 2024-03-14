@@ -30,11 +30,16 @@ namespace Esercizio_finale_s7.Models
         [StringLength(255)]
         public string NoteSpeciali { get; set; }
 
-        public bool? Evaso { get; set; }
+        public bool Evaso { get; set; }
+
+        public bool IsDeleted { get; set; } 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DettaglioOrdine> DettaglioOrdine { get; set; }
 
         public virtual Utente Utente { get; set; }
+
+        [NotMapped]
+        public string EvasoDisplay => Evaso ? "Si" : "No";
     }
 }
