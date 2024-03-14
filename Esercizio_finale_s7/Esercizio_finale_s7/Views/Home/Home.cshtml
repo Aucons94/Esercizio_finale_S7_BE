@@ -5,36 +5,46 @@
 }
 
 <h2 class="text-center">Magnate Questa</h2>
-<h6 class="text-center">Il nostro menu</h6>
-<hr />
-<div class="row">
-    @if (Model != null && Model.Any())
-    {
-        foreach (var item in Model)
+@if (!User.Identity.IsAuthenticated)
+{
+    <h3 class="text-center">Per vedere il nostro menù esegui l'accesso o registrati</h3>
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <h6 class="text-center">Il nostro menù</h6>
+    <hr />
+    <div class="row">
+        @if (Model != null && Model.Any())
         {
-            <div class="col-md-4">
-                <div class="card mb-4" style="width: 18rem;">
-                    <img src="@item.FotoUrl" class="card-img-top" alt="Immagine del Prodotto" style="max-height: 180px;">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Nome</h5>
-                        <p class="card-text">Prezzo: @item.Prezzo</p>
-                        <form method="post" action="@Url.Action("AggiungiAlCarrello", "Home")">
-                            @Html.Hidden("id", item.IdProdotto)
-                            @Html.Hidden("nome", item.Nome)
-                            @Html.Hidden("prezzo", item.Prezzo)
-                            @if (User.Identity.IsAuthenticated)
-                            {
+            foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 18rem;">
+                        <img src="@item.FotoUrl" class="card-img-top" alt="Immagine del Prodotto" style="max-height: 180px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nome</h5>
+                            <p class="card-text">Prezzo: @item.Prezzo</p>
+                            <form method="post" action="@Url.Action("AggiungiAlCarrello", "Home")">
+                                @Html.Hidden("id", item.IdProdotto)
+                                @Html.Hidden("nome", item.Nome)
+                                @Html.Hidden("prezzo", item.Prezzo)
                                 <div class="form-group mb-3">
                                     <label for="quantita">Quantità:</label>
                                     <input type="number" class="form-control" name="quantita" min="1" value="1" id="quantita">
                                 </div>
                                 <button type="submit" class="btn btn-sm btn-success mb-3">Aggiungi Al Carrello</button>
-                            }
-                        </form>
-                        @Html.ActionLink("Dettagli", "Details", "Prodotto", new { id = item.IdProdotto }, new { @class = "btn btn-sm btn-warning" })
+                            </form>
+                            @Html.ActionLink("Dettagli", "Details", "Prodotto", new { id = item.IdProdotto }, new { @class = "btn btn-sm btn-warning" })
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
-</div>
+    </div>
+}
+<h4>La Nostra Storia</h4>
+<p>La pizzeria "Magnate Questa" è un'icona culinaria nel cuore di Roma, con una storia che risale ai tempi antichi della città eterna. Fondata nel 1920 da Giovanni Rossi, un appassionato chef della Capitale, la pizzeria ha saputo mantenere viva la tradizione della vera pizza romana nel tessuto culturale di Roma.</p>
+<p>La ricetta segreta della pizza "Magnate Questa" è stata tramandata di generazione in generazione, garantendo un sapore autentico e unico che continua a deliziare i palati di locali e turisti da decenni.</p>
+<p>Situata in un affascinante vicolo nel quartiere Trastevere, il locale conserva ancora l'atmosfera accogliente e familiare delle autentiche pizzerie italiane. Ogni mattina, il forno a legna viene acceso per preparare le pizze, realizzate con ingredienti freschi e di alta qualità.</p>
+<p>La pizzeria "Magnate Questa" non è solo un luogo dove gustare ottime pizze, ma è diventata nel tempo un punto di incontro per gli amanti della buona cucina e della tradizione italiana. Artisti, intellettuali e personaggi famosi hanno varcato le sue porte, contribuendo a creare un'atmosfera unica e vibrante.</p>
+<p>Vieni a visitare la pizzeria "Magnate Questa" e immergiti nella storia e nei sapori autentici di Roma!</p>

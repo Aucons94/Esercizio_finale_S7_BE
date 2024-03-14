@@ -1,0 +1,151 @@
+﻿@model IEnumerable<Esercizio_finale_s7.Models.CarrelloItem>
+
+@{
+    ViewBag.Title = "VisualizzaCarrello";
+}
+
+<h2 class="text-center">Carrello</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome Prodotto</th>
+                <th>Quantità</th>
+                <th>Prezzo Unitario</th>
+                <th>Subtotale</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var carrelloItem in Model)
+            {
+                <tr>
+                    <td>@carrelloItem.Prodotto.Nome</td>
+                    <td>
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary" type="button" onclick="AggiornaQuantità(@carrelloItem.Prodotto.IdProdotto, -1)">-</button>
+                            <input type="text" class="form-control quantita" value="@carrelloItem.Quantita" data-id="@carrelloItem.Prodotto.IdProdotto" readonly />
+                            <button class="btn btn-outline-secondary" type="button" onclick="AggiornaQuantità(@carrelloItem.Prodotto.IdProdotto, 1)">+</button>
+                        </div>
+                    </td>
+                    <td class="prezzo">@carrelloItem.Prodotto.Prezzo</td>
+                    <td class="subtotale">@carrelloItem.Prodotto.Prezzo*carrelloItem.Quantita</td>
+                    <td>
+                        <button class="btn btn-danger" onclick="RimuoviDalCarrello('@carrelloItem.Prodotto.IdProdotto')">Rimuovi</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    if (Model != null && Model.Any())
+    {
+        decimal totale = Model.Sum(item => item.Prodotto.Prezzo * item.Quantita);
+        <div class="mb-3 mt-3">
+            <h4><strong>Totale: <span id="totale">@totale</span></strong></h4>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Il tuo carrello è vuoto.
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#carrelloVuotoModal').modal('show');
+        });
+    </script>
+}
+
+<!-- Modale per carrello vuoto, da spostare a layout ?  -->
+<div class="modal fade" id="carrelloVuotoModal" tabindex="-1" role="dialog" aria-labelledby="carrelloVuotoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="carrelloVuotoModalLabel">Attenzione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Il tuo carrello è vuoto.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("ConcludiOrdine", "Home", FormMethod.Post))
+{
+    <div class="form-group mb-3">
+        @Html.LabelFor(model => model.First().IndirizzoConsegna, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.First().IndirizzoConsegna, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(model => model.First().NoteSpeciali, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.First().NoteSpeciali, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <input type="submit" value="Concludi Ordine" class="btn btn-primary mb-3" />
+}
+
+@Html.ActionLink("Torna alla Home", "Home", "Home")
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('.quantita').change(function () {
+                var quantita = parseInt($(this).val());
+                var prezzo = parseFloat($(this).closest('tr').find('.prezzo').text());
+                var subtotale = quantita * prezzo;
+                $(this).closest('tr').find('.subtotale').text(subtotale.toFixed(2));
+
+                // Calcolo del totale
+                var totale = 0;
+                $('.subtotale').each(function () {
+                    totale += parseFloat($(this).text());
+                });
+                $('#totale').text(totale.toFixed(2));
+            });
+        });
+
+        function AggiornaQuantità(productId, change) {
+            var inputQuantita = $('input[data-id="' + productId + '"]');
+            var nuovaQuantita = parseInt(inputQuantita.val()) + change;
+
+            if (nuovaQuantita >= 1) {
+                inputQuantita.val(nuovaQuantita);
+                inputQuantita.change();
+            }
+        }
+
+        function RimuoviDalCarrello(productId) {
+            if (confirm('Sei sicuro di voler rimuovere questo prodotto dal carrello?')) {
+                $.ajax({
+                    url: '@Url.Action("RimuoviDalCarrello", "Home")',
+                    type: 'POST',
+                    data: { productId: productId },
+                    success: function (result) {
+                        if (result.success) {
+                            location.reload();
+                        } else {
+                            alert('Si è verificato un errore durante la rimozione del prodotto.');
+                        }
+                    },
+                    error: function () {
+                        alert('Si è verificato un errore durante la rimozione del prodotto.');
+                    }
+                });
+            }
+        }
+    </script>
+}

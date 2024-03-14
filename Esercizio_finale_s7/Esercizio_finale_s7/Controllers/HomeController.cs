@@ -49,23 +49,34 @@ namespace Esercizio_finale_s7.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(Utente utente)
         {
-            Utente utenteTrovato = db.Utente.FirstOrDefault(u => u.Email == utente.Email && u.Password == utente.Password);
-
-            if (utenteTrovato != null)
+            if (ModelState.IsValid)
             {
-                Session["UserId"] = utenteTrovato.IdUtente;
 
-                FormsAuthentication.SetAuthCookie(utente.Email, true);
+                Utente utenteTrovato = db.Utente.FirstOrDefault(u => u.Email == utente.Email);
 
-                return RedirectToAction("Home", "Home");
+                if (utenteTrovato != null)
+                {
+                    if (utenteTrovato.Password == utente.Password)
+                    {
+                        Session["UserId"] = utenteTrovato.IdUtente;
+                        FormsAuthentication.SetAuthCookie(utente.Email, true);
+                        return RedirectToAction("Home", "Home");
+                    }
+                    else
+                    {
+                        ViewBag.AuthError = "Aoh scrivi mejo. Riprova.";
+                    }
+                }
+                else
+                {
+                    ViewBag.AuthError = "Hai sbajato maile!!";
+                }
             }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Credenziali non valide. Riprova.");
-                return View();
-            }
+
+            return View();
         }
 
         [AllowAnonymous]
@@ -107,11 +118,10 @@ namespace Esercizio_finale_s7.Controllers
             {
                 return View(carrelloItems);
             }
-            else
-            {
-                return View("Home");
-            }
+
+            return RedirectToAction("Home");
         }
+
 
         [HttpPost]
         public ActionResult AggiungiAlCarrello(int id, string nome, decimal prezzo, int quantita)
@@ -140,6 +150,23 @@ namespace Esercizio_finale_s7.Controllers
 
             return RedirectToAction("Home");
         }
+        [HttpPost]
+        public ActionResult RimuoviDalCarrello(int productId)
+        {
+            var carrello = Session["Carrello"] as List<CarrelloItem>;
+            if (carrello != null)
+            {
+                var carrelloItem = carrello.FirstOrDefault(item => item.Prodotto.IdProdotto == productId);
+                if (carrelloItem != null)
+                {
+                    carrello.Remove(carrelloItem);
+                    Session["Carrello"] = carrello;
+                }
+            }
+
+            return Json(new { success = true });
+        }
+
 
         [HttpPost]
         public ActionResult ConcludiOrdine(string indirizzoConsegna, string noteSpeciali)

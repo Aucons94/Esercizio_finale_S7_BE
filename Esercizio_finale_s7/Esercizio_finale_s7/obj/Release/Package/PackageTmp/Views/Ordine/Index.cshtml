@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Esercizio_finale_s7.Models.Ordine>
+
+@{
+    ViewBag.Title = "Index";
+    bool isAdmin = User.IsInRole("Admin");
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Utente.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataOrdine)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Importo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IndirizzoConsegna)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoteSpeciali)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Evaso)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Utente.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataOrdine)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Importo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IndirizzoConsegna)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoteSpeciali)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Evaso)
+        </td>
+
+        @if (isAdmin)
+        {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdine }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdOrdine }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdine })
+            </td>
+        }
+        </tr>
+}
+
+</table>

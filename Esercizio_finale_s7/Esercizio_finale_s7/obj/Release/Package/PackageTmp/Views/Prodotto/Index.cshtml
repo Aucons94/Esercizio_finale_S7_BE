@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Esercizio_finale_s7.Models.Prodotto>
+
+@{
+    ViewBag.Title = "Prodotti";
+}
+
+<h2>Prodotti</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="@item.FotoUrl" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Nome</h5>
+                    <p class="card-text">Prezzo: @item.Prezzo</p>
+                    <p class="card-text">Tempo di Consegna: @item.TempoConsegna</p>
+                    <p class="card-text">Ingredienti: @item.Ingredienti</p>
+                    <div class="btn-group" role="group" aria-label="Actions">
+                        @Html.ActionLink("Details", "Details", new { id = item.IdProdotto }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IdProdotto }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdProdotto }, new { @class = "btn btn-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success">Aggiungi Prodotto</a>
+</p>
