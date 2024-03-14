@@ -21,9 +21,10 @@ namespace Esercizio_finale_s7.Models
         public int IdUtente { get; set; }
 
         [Display(Name = "Data Ordine")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:HH:mm dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataOrdine { get; set; }
-
-        public decimal? Importo { get; set; }
+        public decimal Importo { get; set; }
 
         [StringLength(255)]
         [Display(Name = "Indirizzo di Consegna")]

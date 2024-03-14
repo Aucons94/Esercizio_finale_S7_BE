@@ -40,9 +40,15 @@ namespace Esercizio_finale_s7.Controllers
         // GET: Ordine/Create
         public ActionResult Create()
         {
-            ViewBag.IdUtente = new SelectList(db.Utente, "IdUtente", "Nome");
+            ViewBag.IdUtente = new SelectList(db.Utente.Select(u => new
+            {
+                Id = u.IdUtente,
+                NomeCompleto = u.Nome + " " + u.Cognome
+            }), "Id", "NomeCompleto");
+
             return View(new Ordine());
         }
+
 
         // POST: Ordine/Create
         // Per la protezione da attacchi di overposting, abilitare le proprietà a cui eseguire il binding. 
@@ -135,5 +141,27 @@ namespace Esercizio_finale_s7.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpGet]
+        public JsonResult GetTotaleOrdiniEvasi()
+        {
+            var totaleOrdiniEvasi = db.Ordine.Where(o => o.Evaso && !o.IsDeleted).Count();
+            return Json(totaleOrdiniEvasi, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetSommaImportiOrdiniEvasi(DateTime data)
+        {
+            DateTime inizioGiorno = data.Date;
+            DateTime fineGiorno = data.Date.AddDays(1).AddTicks(-1);
+
+            decimal sommaImporti = db.Ordine
+                .Where(o => o.Evaso && !o.IsDeleted && o.DataOrdine >= inizioGiorno && o.DataOrdine <= fineGiorno)
+                .Select(o => o.Importo)
+                .DefaultIfEmpty(0)
+                .Sum();
+
+            return Json(sommaImporti, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

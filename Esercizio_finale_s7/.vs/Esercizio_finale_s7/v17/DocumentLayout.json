@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|c:\\users\\alessandro\\desktop\\back-end\\mese 2\\settimana 3\\esercizio_finale_s7\\esercizio_finale_s7\\esercizio_finale_s7\\views\\ordine\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|solutionrelative:esercizio_finale_s7\\views\\ordine\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|c:\\users\\alessandro\\desktop\\back-end\\mese 2\\settimana 3\\esercizio_finale_s7\\esercizio_finale_s7\\esercizio_finale_s7\\views\\ordine\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|solutionrelative:esercizio_finale_s7\\views\\ordine\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|c:\\users\\alessandro\\desktop\\back-end\\mese 2\\settimana 3\\esercizio_finale_s7\\esercizio_finale_s7\\esercizio_finale_s7\\views\\home\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|solutionrelative:esercizio_finale_s7\\views\\home\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\esercizio_finale_s7\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|solutionrelative:esercizio_finale_s7\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\esercizio_finale_s7\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|solutionrelative:esercizio_finale_s7\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|c:\\users\\alessandro\\desktop\\back-end\\mese 2\\settimana 3\\esercizio_finale_s7\\esercizio_finale_s7\\esercizio_finale_s7\\controllers\\ordinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{67ABF07C-25BD-4F8B-A164-CDCE3DBC877C}|Esercizio_finale_s7\\Esercizio_finale_s7.csproj|solutionrelative:esercizio_finale_s7\\controllers\\ordinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,53 +31,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Views\\Ordine\\Create.cshtml",
-              "RelativeDocumentMoniker": "Esercizio_finale_s7\\Views\\Ordine\\Create.cshtml",
-              "ToolTip": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Views\\Ordine\\Create.cshtml",
-              "RelativeToolTip": "Esercizio_finale_s7\\Views\\Ordine\\Create.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAB7AAAA",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Views\\Ordine\\Index.cshtml",
+              "RelativeDocumentMoniker": "Esercizio_finale_s7\\Views\\Ordine\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Views\\Ordine\\Index.cshtml",
+              "RelativeToolTip": "Esercizio_finale_s7\\Views\\Ordine\\Index.cshtml",
+              "ViewState": "AQIAADsAAAAAAAAAAAAAAE4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-14T21:07:54.782Z",
+              "WhenOpened": "2024-03-14T22:13:02.662Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Home.cshtml",
-              "DocumentMoniker": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Views\\Home\\Home.cshtml",
-              "RelativeDocumentMoniker": "Esercizio_finale_s7\\Views\\Home\\Home.cshtml",
-              "ToolTip": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Views\\Home\\Home.cshtml",
-              "RelativeToolTip": "Esercizio_finale_s7\\Views\\Home\\Home.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-14T21:06:44.416Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Web.config",
-              "DocumentMoniker": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Web.config",
-              "RelativeDocumentMoniker": "Esercizio_finale_s7\\Web.config",
-              "ToolTip": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Web.config",
-              "RelativeToolTip": "Esercizio_finale_s7\\Web.config",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-03-14T20:59:40.919Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Esercizio_finale_s7\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Esercizio_finale_s7\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAIQAAAAAAAAAAAAAwLoAAAARAAAA",
+              "Title": "OrdineController.cs",
+              "DocumentMoniker": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Controllers\\OrdineController.cs",
+              "RelativeDocumentMoniker": "Esercizio_finale_s7\\Controllers\\OrdineController.cs",
+              "ToolTip": "C:\\Users\\Alessandro\\Desktop\\Back-end\\Mese 2\\Settimana 3\\Esercizio_finale_S7\\Esercizio_finale_s7\\Esercizio_finale_s7\\Controllers\\OrdineController.cs",
+              "RelativeToolTip": "Esercizio_finale_s7\\Controllers\\OrdineController.cs",
+              "ViewState": "AQIAAHwAAAAAAAAAAAAAAJUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-13T16:58:24.685Z"
+              "WhenOpened": "2024-03-14T21:23:26.521Z",
+              "EditorCaption": ""
             }
           ]
         }

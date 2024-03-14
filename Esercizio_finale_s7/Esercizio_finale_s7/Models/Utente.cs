@@ -47,5 +47,6 @@ namespace Esercizio_finale_s7.Models
         public virtual Ruolo Ruolo { get; set; }
         public bool IsDeleted { get; set; }
 
+
     }
 }

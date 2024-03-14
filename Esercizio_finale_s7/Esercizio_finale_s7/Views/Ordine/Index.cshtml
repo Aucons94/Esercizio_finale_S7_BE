@@ -72,3 +72,43 @@
         }
     </tbody>
 </table>
+<p id="totaleOrdiniEvasi">Totale Ordini Evasi: </p>
+<input type="date" id="dataOrdine" name="dataOrdine">
+<button onclick="fetchSommaImporti()">Calcola Somma Importi</button>
+<p id="sommaImporti">Somma Importi Ordini Evasi: </p>
+
+
+@section Scripts {
+    <script>
+        function getTotaleOrdiniEvasi() {
+            fetch('https://localhost:44356/Ordine/GetTotaleOrdiniEvasi')
+                .then(response => response.json())
+                .then(data => {
+                    const totaleOrdiniEvasiElement = document.getElementById("totaleOrdiniEvasi");
+                    totaleOrdiniEvasiElement.innerText = "Totale Ordini Evasi: " + data; // Imposta il totale come numero
+                })
+                .catch(error => {
+                    console.error('Si è verificato un errore durante il recupero del totale degli ordini evasi:', error);
+                });
+        }
+
+        // Chiamare la funzione quando la pagina è pronta
+        document.addEventListener('DOMContentLoaded', function () {
+            getTotaleOrdiniEvasi();
+        });
+        function fetchSommaImporti() {
+            const dataOrdine = document.getElementById("dataOrdine").value;
+
+            fetch(`https://localhost:44356/Ordine/GetSommaImportiOrdiniEvasi?data=${dataOrdine}`)
+                .then(response => response.json())
+                .then(data => {
+                    const sommaImportiElement = document.getElementById("sommaImporti");
+                    sommaImportiElement.innerText = "Somma Importi Ordini Evasi: " + data; // Imposta la somma degli importi
+                })
+                .catch(error => {
+                    console.error('Si è verificato un errore durante il recupero della somma degli importi:', error);
+                });
+        }
+
+    </script>
+}
