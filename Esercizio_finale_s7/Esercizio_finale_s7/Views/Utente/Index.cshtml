@@ -4,72 +4,75 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="background-custom p-4 rounded 4">
+    <h2>Utenti</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ruolo.Role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cognome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Provincia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Citta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Indirizzo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ruolo.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cognome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provincia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Citta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Indirizzo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ruolo.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cognome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Provincia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Citta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Indirizzo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdUtente }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdUtente }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdUtente })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ruolo.Role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cognome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provincia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Citta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Indirizzo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.IdUtente })" class="btn btn-outline-primary">Modifica</a>
+                    <a href="@Url.Action("Details", new { id = item.IdUtente })" class="btn btn-outline-primary">Dettagli</a>
+                    <a href="@Url.Action("Delete", new { id = item.IdUtente })" class="btn btn-outline-danger">Cancella</a>
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-outline-primary">Aggiungi Utente</a>
+    </p>
+</div>

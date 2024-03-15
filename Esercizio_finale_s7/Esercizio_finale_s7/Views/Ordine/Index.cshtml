@@ -3,80 +3,78 @@
 @{
     ViewBag.Title = "Index";
     bool isAdmin = User.IsInRole("Admin");
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                Utente
-            </th>
-            <th>
-                Data Ordine
-            </th>
-            <th>
-                Importo
-            </th>
-            <th>
-                Indirizzo Consegna
-            </th>
-            <th>
-                Note Speciali
-            </th>
-            <th>
-                Evaso
-            </th>
-            @if (isAdmin)
-            {
-                <th></th>
-            }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+}<div class="background-custom p-4 rounded 4">
+    <h2>Ordini</h2>
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Utente.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataOrdine)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Importo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IndirizzoConsegna)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NoteSpeciali)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EvasoDisplay)
-                </td>
-
+                <th>
+                    Utente
+                </th>
+                <th>
+                    Data Ordine
+                </th>
+                <th>
+                    Importo
+                </th>
+                <th>
+                    Indirizzo Consegna
+                </th>
+                <th>
+                    Note Speciali
+                </th>
+                <th>
+                    Evaso
+                </th>
                 @if (isAdmin)
                 {
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IdOrdine }, new { @class = "btn btn-primary" }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.IdOrdine }, new { @class = "btn btn-info" }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IdOrdine }, new { @class = "btn btn-danger" })
-                    </td>
+                    <th></th>
                 }
             </tr>
-        }
-    </tbody>
-</table>
-<p id="totaleOrdiniEvasi">Totale Ordini Evasi: </p>
-<input type="date" id="dataOrdine" name="dataOrdine">
-<button onclick="fetchSommaImporti()">Calcola Somma Importi</button>
-<p id="sommaImporti">Somma Importi Ordini Evasi: </p>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Utente.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataOrdine)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Importo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IndirizzoConsegna)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoteSpeciali)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EvasoDisplay)
+                    </td>
 
+                    @if (isAdmin)
+                    {
+                        <td>
+                            <a href="@Url.Action("Edit", new { id = item.IdUtente })" class="btn btn-outline-primary">Modifica</a>
+                            <a href="@Url.Action("Details", new { id = item.IdUtente })" class="btn btn-outline-primary">Dettagli</a>
+                            <a href="@Url.Action("Delete", new { id = item.IdUtente })" class="btn btn-outline-danger">Cancella</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-outline-primary">Aggiungi Ordine</a>
+    </p>
+    <p id="totaleOrdiniEvasi">Totale Ordini Evasi: </p>
+    <p id="sommaImporti" class="my-2">Somma importi ordini evasi nella data selezionata: </p>
+    <input type="date" id="dataOrdine" name="dataOrdine">
+    <button onclick="fetchSommaImporti()" class="btn btn-outline-primary">Calcola Somma Importi</button>
+</div>
 
 @section Scripts {
     <script>
@@ -92,10 +90,11 @@
                 });
         }
 
-        // Chiamare la funzione quando la pagina è pronta
+
         document.addEventListener('DOMContentLoaded', function () {
             getTotaleOrdiniEvasi();
         });
+
         function fetchSommaImporti() {
             const dataOrdine = document.getElementById("dataOrdine").value;
 
@@ -103,12 +102,13 @@
                 .then(response => response.json())
                 .then(data => {
                     const sommaImportiElement = document.getElementById("sommaImporti");
-                    sommaImportiElement.innerText = "Somma Importi Ordini Evasi: " + data; // Imposta la somma degli importi
+                    sommaImportiElement.innerText = "Somma importi ordini evasi nella data selezionata: Euro " + data; // Imposta la somma degli importi
                 })
                 .catch(error => {
                     console.error('Si è verificato un errore durante il recupero della somma degli importi:', error);
                 });
         }
-
     </script>
 }
+
+  

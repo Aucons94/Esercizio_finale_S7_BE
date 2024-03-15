@@ -19,12 +19,7 @@ namespace Esercizio_finale_s7.Controllers
             var prodotti = db.Prodotto.Where(p => !p.IsDeleted).ToList();
             return View(prodotti);
         }
-
-        public ActionResult Profilo()
-        {
-            return View();
-        }
-
+ 
         public ActionResult OrdiniUtente()
         {
             if (User.Identity.IsAuthenticated)
@@ -45,12 +40,6 @@ namespace Esercizio_finale_s7.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Login()
-        {
-            return View(new Autorizzazione());
-        }
-
-        [AllowAnonymous]
         public ActionResult DettagliProdotto(int? id)
         {
             if (id == null)
@@ -64,6 +53,13 @@ namespace Esercizio_finale_s7.Controllers
             }
             return View(prodotto);
         }
+
+        [AllowAnonymous]
+        public ActionResult Login()
+        {
+            return View(new Autorizzazione());
+        }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -94,7 +90,7 @@ namespace Esercizio_finale_s7.Controllers
                 }
             }
 
-            return View();
+            return View(new Autorizzazione());
         }
 
         [AllowAnonymous]

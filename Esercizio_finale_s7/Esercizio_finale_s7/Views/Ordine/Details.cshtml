@@ -3,56 +3,57 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="background-custom p-4 rounded 4">
+    <h2>Dettagli Ordine</h2>
 
-<h2>Dettagli Ordine</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Utente.Nome)</dt>
+            <dd>@Html.DisplayFor(model => model.Utente.Nome)</dd>
 
-<div>
-    <h4>Informazioni Ordine</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Utente.Nome)</dt>
-        <dd>@Html.DisplayFor(model => model.Utente.Nome)</dd>
+            <dt>@Html.DisplayNameFor(model => model.DataOrdine)</dt>
+            <dd>@Html.DisplayFor(model => model.DataOrdine)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.DataOrdine)</dt>
-        <dd>@Html.DisplayFor(model => model.DataOrdine)</dd>
+            <dt>@Html.DisplayNameFor(model => model.Importo)</dt>
+            <dd>@Html.DisplayFor(model => model.Importo)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Importo)</dt>
-        <dd>@Html.DisplayFor(model => model.Importo)</dd>
+            <dt>@Html.DisplayNameFor(model => model.IndirizzoConsegna)</dt>
+            <dd>@Html.DisplayFor(model => model.IndirizzoConsegna)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.IndirizzoConsegna)</dt>
-        <dd>@Html.DisplayFor(model => model.IndirizzoConsegna)</dd>
+            <dt>@Html.DisplayNameFor(model => model.NoteSpeciali)</dt>
+            <dd>@Html.DisplayFor(model => model.NoteSpeciali)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.NoteSpeciali)</dt>
-        <dd>@Html.DisplayFor(model => model.NoteSpeciali)</dd>
+            <dt>@Html.DisplayNameFor(model => model.Evaso)</dt>
+            <dd>@Html.DisplayFor(model => model.EvasoDisplay)</dd> <!-- Utilizza la proprietà EvasoDisplay -->
 
-        <dt>@Html.DisplayNameFor(model => model.Evaso)</dt>
-        <dd>@Html.DisplayFor(model => model.EvasoDisplay)</dd> <!-- Utilizza la proprietà EvasoDisplay -->
-
-    </dl>
-</div>
-
-<div>
-    <h4>Prodotti Acquistati</h4>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Prodotto</th>
-                <th>Quantità</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var dettaglio in Model.DettaglioOrdine)
-            {
+        </dl>
+    </div>
+    <div>
+        <h4>Prodotti Acquistati</h4>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@dettaglio.Prodotto.Nome</td>
-                    <td>@dettaglio.Quantita</td>
+                    <th>Prodotto</th>
+                    <th>Quantità</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var dettaglio in Model.DettaglioOrdine)
+                {
+                    <tr>
+                        <td>@dettaglio.Prodotto.Nome</td>
+                        <td>@dettaglio.Quantita</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.IdOrdine }) |
-    @Html.ActionLink("Indietro alla Lista", "Index")
-</p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Vai alla Modifica", "Edit", new { id = Model.IdOrdine }, new { @class = "my-4 btn btn-outline-primary", style = "text-decoration: none;" }) |
+            @Html.ActionLink("Ritorna alla lista Prodotti", "Index", null, new { @class = "mt-2 mb-2 btn btn-outline-primary", style = "text-decoration: none;" })
+        </div>
+    </div>
+</div>

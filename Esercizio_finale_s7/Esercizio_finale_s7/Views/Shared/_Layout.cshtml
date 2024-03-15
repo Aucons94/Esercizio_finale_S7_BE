@@ -5,78 +5,52 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ojuju:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     @Styles.Render("~/Content/css")
+    <link href="~/Content/Style.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark" style="border-bottom: 1px solid black">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark sticky-top" style="border-bottom: 1px solid black; background-color: #d2d2d2;  ">
         <div class="container">
-            <a href="@Url.Action("Home", "Home")" class="navbar-brand"><img src="~/Content/imgs/logo.png" style="width:50px" /></a>
             @if (User.Identity.IsAuthenticated)
             {
                 if (User.IsInRole("Admin"))
                 {
-                    <div class="mx-5 collapse navbar-collapse d-flex justify-content-start">
-                        <div class="d-flex btn btn-outline-danger">
-                            <ul style="list-style: none" class="m-0 p-0">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Menu Admin
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        @Html.ActionLink("Gestione Prodotti", "Index", "Prodotto", new { area = "" }, new { @class = "nav-link mx-3" })
-                                        <li><hr /></li>
-                                        @Html.ActionLink("Gestione Utenti", "Index", "Utente", new { area = "" }, new { @class = "nav-link mx-3" })
-                                        <li><hr /></li>
-                                        @Html.ActionLink("Gestione Ordini", "Index", "Ordine", new { area = "" }, new { @class = "nav-link mx-3" })
-                                        <li><hr /></li>
-                                        @Html.ActionLink("Controllo Ordini", "Index", "Ordine", new { area = "" }, new { @class = "nav-link mx-3" })
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="me-5">
+                        <a href="@Url.Action("Home", "Home")" class="navbar-brand m-0"><img src="~/Content/images/logo.png" style="width:100px" /></a>
+                        @Html.ActionLink("Home", "Home", "Home", new { area = "" }, new { @class = "btn  ms-0" })
+                        @Html.ActionLink("Gestione Prodotti", "Index", "Prodotto", new { area = "" }, new { @class = "btn  mx-2" })
+                        @Html.ActionLink("Gestione Utenti", "Index", "Utente", new { area = "" }, new { @class = "btn mx-2" })
+                        @Html.ActionLink("Gestione Ordini", "Index", "Ordine", new { area = "" }, new { @class = "btn mx-2" })
                     </div>
-                    <div class="d-flex btn btn-outline-secondary">
-                        <ul style="list-style: none" class="m-0 p-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Ciao @User.Identity.Name
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Profilo", "Profilo", "Home", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                    <li><hr /></li>
-                                    <li>@Html.ActionLink("Carrello", "VisualizzaCarrello", "Home", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                    <li><hr /></li>
-                                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="d-flex">
+                        @Html.ActionLink("Carrello", "VisualizzaCarrello", "Home", new { area = "" }, new { @class = "btn me-2" })
+                        @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "btn " })
                     </div>
                 }
                 else
                 {
-                    <div class="d-flex btn btn-outline-secondary">
-                        <ul style="list-style: none" class="m-0 p-0">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Ciao @User.Identity.Name
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Profilo", "Profilo", "Home", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                    <li><hr /></li>
-                                    <li>@Html.ActionLink("Carrello", "VisualizzaCarrello", "Home", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                    <li>@Html.ActionLink("I Miei Ordini", "Index", "Ordine", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                    <li><hr /></li>
-                                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "dropdown-item" })</li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <div class="me-5">
+                        <a href="@Url.Action("Home", "Home")" class="navbar-brand m-0"><img src="~/Content/images/logo.png" style="width:100px" /></a>
+                        @Html.ActionLink("Home", "Home", "Home", new { area = "" }, new { @class = "btn ms-0" })
+                    </div>
+                    <div class="d-flex">
+                        @Html.ActionLink("Carrello", "VisualizzaCarrello", "Home", new { area = "" }, new { @class = "btn me-2" })
+                        @Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @class = "btn" })
                     </div>
                 }
             }
             else
             {
-                @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "nav-link mx-3" });
+
+                <div>
+                    <a href="@Url.Action("Home", "Home")" class="navbar-brand"><img src="~/Content/images/logo.png" style="width:100px" /></a>
+                    @Html.ActionLink("Home", "Home", "Home", new { area = "" }, new { @class = "btn  mx-2" })
+                </div>
+                @Html.ActionLink("Login", "Login", "Home", new { area = "" }, new { @class = "btn mx-2" });
             }
         </div>
     </nav>
@@ -84,8 +58,28 @@
         @RenderBody()
         <hr />
     </div>
-    <footer class="mt-5" style="background-color: #ffd4b6">
+    <footer class="mt-5 fixed-bottom customFooter">
+        <div class="container p-4" style="height: 13em;">
+            <div class="row d-flex justify-content-between" style="height: 100%">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-3" style="letter-spacing: 2px; color: black;">Dove Siamo</h5>
+                    <div class="footer-info" style="color: #4f4f4f;">
+                        <p><strong>Indirizzo:</strong> Via della Capanna 1</p>
+                        <p><strong>Località:</strong> Roma, RM 00100</p>
+                        <p><strong>Telefono:</strong> +39 06XXXXXXX</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-3" style="letter-spacing: 2px; color: black; ">Orario di apertura</h5>
+                    <div class="footer-info" style="color: #4f4f4f;">
+                        <p><strong>Martedì - Domenica:</strong> 19:30 - 23:30</p>
+                        <p><strong>Lunedì:</strong> Chiuso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -94,4 +88,13 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $.validator.methods.range = function (value, element, param) {
+        var globalizedValue = value.replace(",", ".");
+        return this.optional(element)(globalizedValue >= param[0] && globalizedValue <= param[1]);
+    }
 
+    $.validator.methods.number = function (value, element) {
+        return this.optional(element) /^ -? (?: \d +|\d{ 1, 3 } (?: [\s.,]\d{ 3 }) +) (?: [.,]\d +)?$ /.test(value);
+    }
+</script>

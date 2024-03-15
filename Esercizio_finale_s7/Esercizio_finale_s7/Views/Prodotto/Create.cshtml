@@ -4,12 +4,12 @@
     ViewBag.Title = "Create";
 }
 
+<div class="background-custom p-4 rounded 4">
 
+    @using (Html.BeginForm("Create", "Prodotto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm("Create", "Prodotto", FormMethod.Post, new { enctype = "multipart/form-data"}))
-{
-    @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
         <h2>Aggiungi un nuovo Prodotto</h2>
         <hr />
@@ -33,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Prezzo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Prezzo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Prezzo, new { htmlAttributes = new { @class = "form-control", type = "number", step = "0.1" } })
                 @Html.ValidationMessageFor(model => model.Prezzo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,16 +56,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Aggiungi" class="my-4 btn btn-outline-primary" /> |
+                <a href="@Url.Action("Index")" class="mt-2 mb-2 btn btn-outline-primary" style="text-decoration: none;">Ritorna alla gestione prodotti</a>
             </div>
         </div>
+
     </div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

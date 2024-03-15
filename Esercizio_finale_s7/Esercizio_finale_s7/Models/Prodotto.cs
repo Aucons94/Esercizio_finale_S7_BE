@@ -26,7 +26,8 @@ namespace Esercizio_finale_s7.Models
 
         public decimal Prezzo { get; set; }
 
-        [Display(Name = "Tempo Consegna")]
+        [Display(Name = "Tempo Consegna (Minuti)")]
+        [Range(1, int.MaxValue, ErrorMessage = "Il campo Tempo di Consegna deve essere maggiore a 0")]
         public int TempoConsegna { get; set; }
 
         [StringLength(255)]

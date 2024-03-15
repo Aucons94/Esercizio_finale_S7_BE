@@ -3,80 +3,83 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="background-custom p-4 rounded 4">
+    <h2>Details</h2>
 
-<h2>Details</h2>
+    <div>
+        <h4>Utente</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Ruolo.Role)
+            </dt>
 
-<div>
-    <h4>Utente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Ruolo.Role)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ruolo.Role)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ruolo.Role)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Cognome)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cognome)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Cognome)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cognome)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Provincia)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Provincia)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Provincia)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Provincia)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Citta)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Citta)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Citta)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Citta)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Indirizzo)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Indirizzo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Indirizzo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Indirizzo)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Password)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Password)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-    </dl>
+        </dl>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Vai alla Modifica", "Edit", new { id = Model.IdUtente }, new { @class = "my-4 btn btn-outline-primary", style = "text-decoration: none;" }) |
+            @Html.ActionLink("Ritorna alla lista Prodotti", "Index", null, new { @class = "mt-2 mb-2 btn btn-outline-primary", style = "text-decoration: none;" })
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdUtente }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

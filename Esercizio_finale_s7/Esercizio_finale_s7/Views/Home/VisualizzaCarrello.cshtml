@@ -4,98 +4,81 @@
     ViewBag.Title = "VisualizzaCarrello";
 }
 
-<h2 class="text-center">Carrello</h2>
+<div class="background-custom p-4 rounded 4">
+    <h2 class="text-center">Carrello</h2>
 
-<!-- Aggiungi questo blocco per visualizzare il messaggio di errore -->
-@if (!ViewData.ModelState.IsValid)
-{
-    <div class="alert alert-danger">
-        @foreach (var key in ViewData.ModelState.Keys)
-        {
-            foreach (var error in ViewData.ModelState[key].Errors)
-            {
-                <div>@error.ErrorMessage</div>
-            }
-        }
-    </div>
-}
 
-@if (Model != null && Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nome Prodotto</th>
-                <th>Quantità</th>
-                <th>Prezzo Unitario</th>
-                <th>Subtotale</th>
-                <th>Azioni</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var carrelloItem in Model)
-            {
-                <tr>
-                    <td>@carrelloItem.Prodotto.Nome</td>
-                    <td>
-                        <div class="input-group">
-                            <button class="btn btn-outline-secondary" type="button" onclick="AggiornaQuantità(@carrelloItem.Prodotto.IdProdotto, -1)">-</button>
-                            <input type="text" class="form-control quantita" value="@carrelloItem.Quantita" data-id="@carrelloItem.Prodotto.IdProdotto" readonly />
-                            <button class="btn btn-outline-secondary" type="button" onclick="AggiornaQuantità(@carrelloItem.Prodotto.IdProdotto, 1)">+</button>
-                        </div>
-                    </td>
-                    <td class="prezzo">@carrelloItem.Prodotto.Prezzo</td>
-                    <td class="subtotale">@(carrelloItem.Prodotto.Prezzo * carrelloItem.Quantita)</td>
-                    <td>
-                        <button class="btn btn-danger" onclick="RimuoviDalCarrello('@carrelloItem.Prodotto.IdProdotto')">Rimuovi</button>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    if (Model != null && Model.Any())
+    @if (Model != null && Model.Any())
     {
-        decimal totale = Model.Sum(item => item.Prodotto.Prezzo * item.Quantita);
-        <div class="mb-3 mt-3">
-            <h4><strong>Totale: <span id="totale">@totale</span></strong></h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome Prodotto</th>
+                    <th>Quantità</th>
+                    <th>Prezzo Unitario</th>
+                    <th>Subtotale</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var carrelloItem in Model)
+                {
+                    <tr>
+                        <td>@carrelloItem.Prodotto.Nome</td>
+                        <td>
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary" type="button" onclick="AggiornaQuantità(@carrelloItem.Prodotto.IdProdotto, -1)">-</button>
+                                <input type="text" class="form-control quantita" value="@carrelloItem.Quantita" data-id="@carrelloItem.Prodotto.IdProdotto" readonly />
+                                <button class="btn btn-outline-secondary" type="button" onclick="AggiornaQuantità(@carrelloItem.Prodotto.IdProdotto, 1)">+</button>
+                            </div>
+                        </td>
+                        <td class="prezzo">@carrelloItem.Prodotto.Prezzo</td>
+                        <td class="subtotale">@(carrelloItem.Prodotto.Prezzo * carrelloItem.Quantita)</td>
+                        <td>
+                            <button class="btn btn-outline-danger" onclick="RimuoviDalCarrello('@carrelloItem.Prodotto.IdProdotto')">Rimuovi</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        if (Model != null && Model.Any())
+        {
+            decimal totale = Model.Sum(item => item.Prodotto.Prezzo * item.Quantita);
+            <div class="mb-3 mt-3">
+                <h4><strong>Totale: <span id="totale">@totale</span></strong></h4>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning" role="alert">
+            Il tuo carrello è vuoto.
         </div>
     }
-}
-else
-{
-    <div class="alert alert-warning" role="alert">
-        Il tuo carrello è vuoto.
-    </div>
-    <script>
-        $(document).ready(function () {
-            $('#carrelloVuotoModal').modal('show');
-        });
-    </script>
-}
 
-@using (Html.BeginForm("ConcludiOrdine", "Home", FormMethod.Post))
-{
-    <div class="form-group mb-3">
-        @Html.LabelFor(model => model.First().IndirizzoConsegna, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.First().IndirizzoConsegna, new { htmlAttributes = new { @class = "form-control" } })
+    @using (Html.BeginForm("ConcludiOrdine", "Home", FormMethod.Post))
+    {
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.First().IndirizzoConsegna, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.First().IndirizzoConsegna, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group mb-3">
-        @Html.LabelFor(model => model.First().NoteSpeciali, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.First().NoteSpeciali, new { @class = "form-control" })
+        <div class="form-group mb-3">
+            @Html.LabelFor(model => model.First().NoteSpeciali, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.First().NoteSpeciali, new { @class = "form-control" })
+            </div>
         </div>
-    </div>
 
-    <input type="submit" value="Concludi Ordine" class="btn btn-primary mb-3" />
-}
+        <input type="submit" value="Concludi Ordine" class="btn btn-outline-primary mb-3" />
+        @Html.ActionLink("Torna alla Home", "Home", "Home", null, new { @class = "btn btn-outline-primary mb-3" })
+    }
 
-@Html.ActionLink("Torna alla Home", "Home", "Home")
-
-@section scripts {
-    <script>
+</div>
+    @section scripts {
+        <script>
         $(document).ready(function () {
             $('.quantita').change(function () {
                 var quantita = parseInt($(this).val());
@@ -141,5 +124,5 @@ else
                 });
             }
         }
-    </script>
-}
+        </script>
+    }

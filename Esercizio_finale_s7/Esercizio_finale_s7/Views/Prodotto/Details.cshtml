@@ -4,55 +4,58 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="background-custom p-4 rounded 4">
+    <h2>Dettagli Prodotto</h2>
 
-<div>
-    <h4>Prodotto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                <img src="~/Content/Images/@Model.Foto" class="img-thumbnail" alt="Immagine Prodotto" style="max-height: 180px;" />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Prezzo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Prezzo)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.TempoConsegna)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Prezzo)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.TempoConsegna)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TempoConsegna)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingredienti)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TempoConsegna)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Ingredienti)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ingredienti)
-        </dt>
+        </dl>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Home", "Home", "Home", new { area = "" }, new { @class = "my-4 btn btn-outline-primary", style = "text-decoration: none;" }) 
 
-        <dd>
-            @Html.DisplayFor(model => model.Ingredienti)
-        </dd>
-
-    </dl>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Vai alla Modifica", "Edit", new { id = Model.IdProdotto }, new { @class = "my-4 btn btn-outline-primary", style = "text-decoration: none;" }) 
+                @Html.ActionLink("Ritorna alla lista Prodotti", "Index", null, new { @class = "mt-2 mb-2 btn btn-outline-primary", style = "text-decoration: none;" })
+            }
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdProdotto }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

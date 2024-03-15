@@ -1,0 +1,13 @@
+﻿body {
+    background-color: #828282;
+    background-image: url('Images/background.jpg');
+    margin-bottom: 20vh;
+    font-family: "Poppins", sans-serif;
+}
+.background-custom {
+    background-color: #d2d2d2;
+}
+.customFooter {
+    height: 20vh;
+    background-color: #bd8e80
+}
